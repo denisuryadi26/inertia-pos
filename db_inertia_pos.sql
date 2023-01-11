@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 22/12/2022 20:23:44
+ Date: 11/01/2023 11:39:39
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `carts`  (
   INDEX `carts_product_id_foreign`(`product_id`) USING BTREE,
   CONSTRAINT `carts_cashier_id_foreign` FOREIGN KEY (`cashier_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `carts_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of carts
@@ -52,11 +52,13 @@ CREATE TABLE `categories`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
+INSERT INTO `categories` VALUES (1, 'SZTVGb5am2mkCMojIZhGwh61dtzQSQSFgKinQNzQ.png', 'Pakaian', 'Ini adalah pakaian campur seperti Kaos, Hodie, Kemeja, dll', '2022-12-22 21:35:38', '2022-12-22 21:35:38');
+INSERT INTO `categories` VALUES (2, '0zDYbc2CoJB6QyKx8WHToKViwt2lU1LNhJkwtfPt.jpg', 'Makanan', 'Ini adalah kategory makanan berupa snack, makanan ringan, dll.', '2022-12-22 21:39:22', '2022-12-22 21:39:32');
 
 -- ----------------------------
 -- Table structure for customers
@@ -65,16 +67,18 @@ DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_telp` int(11) NOT NULL,
+  `no_telp` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
+INSERT INTO `customers` VALUES (1, 'Deni Suryadi', '8551607171', 'Jl. Kp. Balong Bojonggede Bogor', '2022-12-22 21:56:34', '2022-12-22 22:00:07');
+INSERT INTO `customers` VALUES (2, 'Nenah Awaliah', '8788455556', 'Bojonggede, Bogor', '2023-01-11 10:54:34', '2023-01-11 10:54:34');
 
 -- ----------------------------
 -- Table structure for failed_jobs
@@ -90,7 +94,7 @@ CREATE TABLE `failed_jobs`  (
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `failed_jobs_uuid_unique`(`uuid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of failed_jobs
@@ -105,7 +109,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -135,7 +139,7 @@ CREATE TABLE `model_has_permissions`  (
   PRIMARY KEY (`permission_id`, `model_id`, `model_type`) USING BTREE,
   INDEX `model_has_permissions_model_id_model_type_index`(`model_id`, `model_type`) USING BTREE,
   CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of model_has_permissions
@@ -152,12 +156,13 @@ CREATE TABLE `model_has_roles`  (
   PRIMARY KEY (`role_id`, `model_id`, `model_type`) USING BTREE,
   INDEX `model_has_roles_model_id_model_type_index`(`model_id`, `model_type`) USING BTREE,
   CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of model_has_roles
 -- ----------------------------
 INSERT INTO `model_has_roles` VALUES (1, 'App\\Models\\User', 1);
+INSERT INTO `model_has_roles` VALUES (2, 'App\\Models\\User', 2);
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -168,7 +173,7 @@ CREATE TABLE `password_resets`  (
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   INDEX `password_resets_email_index`(`email`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of password_resets
@@ -187,7 +192,7 @@ CREATE TABLE `permissions`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `permissions_name_guard_name_unique`(`name`, `guard_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of permissions
@@ -240,7 +245,7 @@ CREATE TABLE `personal_access_tokens`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `personal_access_tokens_token_unique`(`token`) USING BTREE,
   INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type`, `tokenable_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of personal_access_tokens
@@ -266,11 +271,13 @@ CREATE TABLE `products`  (
   UNIQUE INDEX `products_barcode_unique`(`barcode`) USING BTREE,
   INDEX `products_category_id_foreign`(`category_id`) USING BTREE,
   CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of products
 -- ----------------------------
+INSERT INTO `products` VALUES (1, 1, 'WlHg2vR2gYGDMwNYcS4qUqS4u7X3mWI5Wf8CB9Pq.jpg', 'KS-001', 'Kaos Polos Wanita', 'Ini adalah kaos polos Wanita', 35000, 50000, 13, '2022-12-22 21:48:27', '2023-01-11 10:44:54');
+INSERT INTO `products` VALUES (2, 1, 'IyGUR1Nqw2WyzZb2C0dHE05GQQvdCeUM0hNw8f97.jpg', 'HD-001', 'Jaket Hoodie Pria', 'Ini adalah jaket hoodie pria', 100000, 150000, 9, '2023-01-11 10:53:40', '2023-01-11 10:55:07');
 
 -- ----------------------------
 -- Table structure for profits
@@ -285,11 +292,13 @@ CREATE TABLE `profits`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `profits_transaction_id_foreign`(`transaction_id`) USING BTREE,
   CONSTRAINT `profits_transaction_id_foreign` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of profits
 -- ----------------------------
+INSERT INTO `profits` VALUES (1, 1, 30000, '2023-01-11 10:44:54', '2023-01-11 10:44:54');
+INSERT INTO `profits` VALUES (2, 2, 50000, '2023-01-11 10:55:07', '2023-01-11 10:55:07');
 
 -- ----------------------------
 -- Table structure for role_has_permissions
@@ -302,7 +311,7 @@ CREATE TABLE `role_has_permissions`  (
   INDEX `role_has_permissions_role_id_foreign`(`role_id`) USING BTREE,
   CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role_has_permissions
@@ -337,6 +346,19 @@ INSERT INTO `role_has_permissions` VALUES (27, 1);
 INSERT INTO `role_has_permissions` VALUES (28, 1);
 INSERT INTO `role_has_permissions` VALUES (29, 1);
 INSERT INTO `role_has_permissions` VALUES (30, 1);
+INSERT INTO `role_has_permissions` VALUES (1, 2);
+INSERT INTO `role_has_permissions` VALUES (2, 2);
+INSERT INTO `role_has_permissions` VALUES (3, 2);
+INSERT INTO `role_has_permissions` VALUES (4, 2);
+INSERT INTO `role_has_permissions` VALUES (5, 2);
+INSERT INTO `role_has_permissions` VALUES (6, 2);
+INSERT INTO `role_has_permissions` VALUES (7, 2);
+INSERT INTO `role_has_permissions` VALUES (16, 2);
+INSERT INTO `role_has_permissions` VALUES (20, 2);
+INSERT INTO `role_has_permissions` VALUES (24, 2);
+INSERT INTO `role_has_permissions` VALUES (28, 2);
+INSERT INTO `role_has_permissions` VALUES (29, 2);
+INSERT INTO `role_has_permissions` VALUES (30, 2);
 
 -- ----------------------------
 -- Table structure for roles
@@ -350,7 +372,7 @@ CREATE TABLE `roles`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `roles_name_guard_name_unique`(`name`, `guard_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of roles
@@ -375,11 +397,13 @@ CREATE TABLE `transaction_details`  (
   INDEX `transaction_details_product_id_foreign`(`product_id`) USING BTREE,
   CONSTRAINT `transaction_details_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `transaction_details_transaction_id_foreign` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of transaction_details
 -- ----------------------------
+INSERT INTO `transaction_details` VALUES (1, 1, 1, 2, 100000, '2023-01-11 10:44:54', '2023-01-11 10:44:54');
+INSERT INTO `transaction_details` VALUES (2, 2, 2, 1, 150000, '2023-01-11 10:55:07', '2023-01-11 10:55:07');
 
 -- ----------------------------
 -- Table structure for transactions
@@ -401,11 +425,13 @@ CREATE TABLE `transactions`  (
   INDEX `transactions_customer_id_foreign`(`customer_id`) USING BTREE,
   CONSTRAINT `transactions_cashier_id_foreign` FOREIGN KEY (`cashier_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `transactions_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of transactions
 -- ----------------------------
+INSERT INTO `transactions` VALUES (1, 1, NULL, 'TRX-0MV13V8AB2', 100000, 10000, 10000, 90000, '2023-01-11 10:44:54', '2023-01-11 10:44:54');
+INSERT INTO `transactions` VALUES (2, 1, 2, 'TRX-MT86G30G00', 200000, 65000, 15000, 135000, '2023-01-11 10:55:07', '2023-01-11 10:55:07');
 
 -- ----------------------------
 -- Table structure for users
@@ -424,11 +450,12 @@ CREATE TABLE `users`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES (1, 'Administrator', 'admin@gmail.com', NULL, '$2y$10$W6jv7dRDmtFTfy2aOMbFru9tqDY55prsaCDiA6goqPrMabqViL.yy', NULL, NULL, NULL, '2022-07-25 15:54:12', '2022-07-25 15:54:12');
+INSERT INTO `users` VALUES (2, 'Fukron', 'fukron@gmail.com', NULL, '$2y$10$A6VOsmK8rf9trecu527C9um9faWI//KVas.JmTwOsTHgfHF/uqD/y', NULL, NULL, NULL, '2022-12-22 21:25:22', '2022-12-22 21:27:43');
 
 SET FOREIGN_KEY_CHECKS = 1;
